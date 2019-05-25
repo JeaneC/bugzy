@@ -9,8 +9,7 @@ import {ITERATION_LOOKUP} from "./ITERATION_LOOKUP";
  * @returns {int} number of work days
  */
 export function getWorkDays(startDate: Date | string, endDate: Date | string) {
-
- const [start, end] = [startDate, endDate].map(raw => {
+  const [start, end] = [startDate, endDate].map(raw => {
     if (raw instanceof Date) return DateTime.fromJSDate(raw);
     else return DateTime.fromISO(raw);
   });
@@ -19,7 +18,11 @@ export function getWorkDays(startDate: Date | string, endDate: Date | string) {
   const endWeekDay = end.weekday;
 
   const DAYS_PER_WEEK = 5;
-  const weeksBetween = end.startOf("week").diff(start.startOf("week"), "weeks").toObject().weeks || 0;
+  const weeksBetween =
+    end
+      .startOf("week")
+      .diff(start.startOf("week"), "weeks")
+      .toObject().weeks || 0;
   let days = weeksBetween * DAYS_PER_WEEK;
 
   const extraDays = Math.min(startWeekDay, 6) - 1;
@@ -51,7 +54,7 @@ export function getIterationByDate(datestring: string | DateTime): LegacyIterati
   return {
     number: iterationString,
     start: iteration.startDate,
-    due: iteration.endDate
+    due: iteration.endDate,
   };
 }
 
@@ -61,10 +64,10 @@ export function getAdjacentIteration(diff: number, date: string | DateTime): Leg
   const baseIteration: string = getIterationByDate(date).number;
   const index = ITERATION_LOOKUP.orderedVersionStrings.indexOf(baseIteration);
   const iterationString = ITERATION_LOOKUP.orderedVersionStrings[index + diff];
-  const iteration = ITERATION_LOOKUP.byVersionString[iterationString]
+  const iteration = ITERATION_LOOKUP.byVersionString[iterationString];
   return {
     number: iterationString,
     start: iteration.startDate,
-    due: iteration.endDate
+    due: iteration.endDate,
   };
 }

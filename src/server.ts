@@ -24,8 +24,8 @@ app.get("/api/metas", async (req, res) => {
         include_fields: ["id", "summary", "cf_fx_iteration", "priority", "status"],
         rules: [
           {key: "blocked", operator: "equals", value: EPIC_BUG_NUMBER},
-          {key: "keywords", operator: "anyexact", value: "meta"}
-        ]
+          {key: "keywords", operator: "anyexact", value: "meta"},
+        ],
       });
       if (bugs && bugs.length) {
         metasCache.data = bugs.map(bug => ({
@@ -33,7 +33,7 @@ app.get("/api/metas", async (req, res) => {
           displayName: removeMeta(bug.summary),
           priority: bug.priority,
           release: bug.cf_fx_iteration.split(".")[0],
-          status: bug.status
+          status: bug.status,
         }));
       }
       metasCache.lastUpdated = DateTime.local();

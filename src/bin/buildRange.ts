@@ -5,45 +5,45 @@ import {DateTime} from "luxon";
 
 interface ReleaseDefinition {
   startVersion: number;
-  iterationsPattern: number[]
+  iterationsPattern: number[];
 }
 
 const EPOC_DATE = DateTime.local(2018, 1, 15);
 const REFERENCE_RELEASES: ReleaseDefinition[] = [
   {
     startVersion: 60,
-    iterationsPattern: Array(4).fill(2)
+    iterationsPattern: Array(4).fill(2),
   },
   {
     startVersion: 62,
-    iterationsPattern: [2, 2, 2, 1]
+    iterationsPattern: [2, 2, 2, 1],
   },
   {
     startVersion: 63,
-    iterationsPattern: Array(5).fill(2)
+    iterationsPattern: Array(5).fill(2),
   },
   {
     startVersion: 64,
-    iterationsPattern: [2, 2, 3]
+    iterationsPattern: [2, 2, 3],
   },
   {
     startVersion: 65,
-    iterationsPattern: [2, 2, 2, 1]
+    iterationsPattern: [2, 2, 2, 1],
   },
   {
     startVersion: 68,
-    iterationsPattern: [2, 2, 2, 3]
+    iterationsPattern: [2, 2, 2, 3],
   },
   {
     startVersion: 69,
-    iterationsPattern: [1, 2, 2, 2]
-  }
+    iterationsPattern: [1, 2, 2, 2],
+  },
 ];
 
 export interface IterationLookup {
-  byDate: {[date: string]: string},
-  byVersionString: {[versionString: string]: {startDate: string, endDate: string, weeks: number}},
-  orderedVersionStrings: string[]
+  byDate: {[date: string]: string};
+  byVersionString: {[versionString: string]: {startDate: string; endDate: string; weeks: number}};
+  orderedVersionStrings: string[];
 }
 
 export function generateIterationDates(): IterationLookup {
@@ -71,7 +71,7 @@ export function generateIterationDates(): IterationLookup {
           result.byVersionString[versionString] = {
             startDate: currentDate.toISO(),
             weeks: weeksInIteration,
-            endDate: currentDate.plus({days: weeksInIteration * 7 - 1}).toISO()
+            endDate: currentDate.plus({days: weeksInIteration * 7 - 1}).toISO(),
           };
           result.orderedVersionStrings.push(versionString);
         }
