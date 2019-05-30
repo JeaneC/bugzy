@@ -19,7 +19,7 @@
     "deploy": "git checkout -B deploy && npm run bundle && git add -f dist",
     "test": "npm run generatelookups && npm run lint && npm run tsc:prod && mocha -r ts-node/register src/**/*.test.js",
     "lint": "eslint --ext=.js,.jsx . && prettier --check \"src/**/*.{ts,tsx,js,jsx}\" --ignore-path .gitignore",
-    "prepush": "npm run lint"
+    "precommit": "npm run lint"
   },
   "author": "k88hudson@gmail.com",
   "license": "MIT",
