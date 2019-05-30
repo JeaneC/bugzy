@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./Triage.scss";
-import {BugList} from "../BugList/BugList";
-import {Loader} from "../Loader/Loader";
+import { BugList } from "../BugList/BugList";
+import { Loader } from "../Loader/Loader";
 
-import {runQuery} from "../../lib/utils";
-import {getAdjacentIteration} from "../../../common/iterationUtils";
-import {BUGZILLA_TRIAGE_COMPONENTS, POCKET_META} from "../../../config/project_settings";
+import { runQuery } from "../../lib/utils";
+import { getAdjacentIteration } from "../../../common/iterationUtils";
+import { BUGZILLA_TRIAGE_COMPONENTS, POCKET_META } from "../../../config/project_settings";
 
 const prevColumns = ["id", "summary", "assigned_to", "priority", "blocks"];
 const columns = ["id", "summary", "last_change_time", "blocks"];
@@ -15,12 +15,12 @@ const columnsDisplay = ["id", "summary", "last_change_time"];
 export class Triage extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {loaded: false, bugs: [], prevIteration: null};
+    this.state = { loaded: false, bugs: [], prevIteration: null };
   }
 
   async componentWillMount() {
     const prevIteration = getAdjacentIteration(-1);
-    const {bugs: prevIterationBugs} = await runQuery({
+    const { bugs: prevIterationBugs } = await runQuery({
       include_fields: prevColumns.concat(["whiteboard", "type"]),
       resolution: "---",
       rules: [
@@ -46,14 +46,14 @@ export class Triage extends React.PureComponent {
         },
       ],
     });
-    const {bugs} = await runQuery({
+    const { bugs } = await runQuery({
       include_fields: columns.concat(["whiteboard", "type", "flags"]),
       resolution: "---",
       priority: "--",
       component: BUGZILLA_TRIAGE_COMPONENTS,
       order: "changeddate DESC",
       rules: [
-        {key: "keywords", operator: "nowords", value: "meta"},
+        { key: "keywords", operator: "nowords", value: "meta" },
         {
           key: "status_whiteboard",
           operator: "notsubstring",

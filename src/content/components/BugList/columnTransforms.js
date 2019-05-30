@@ -1,9 +1,9 @@
 import React from "react";
-import {emails, ui_emails} from "../../../config/people";
+import { emails, ui_emails } from "../../../config/people";
 import tagConfig from "../../../config/tags";
 import styles from "./BugList.scss";
 import priorityStyles from "../PriorityGuide/PriorityGuide.scss";
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 const OPEN_BUG_URL = "https://bugzilla.mozilla.org/show_bug.cgi?id=";
 
 const numberWithSpaces = n => {
@@ -38,7 +38,7 @@ export function parseIteration(iterationString) {
   return result ? result[0] : "";
 }
 
-function renderWhiteboard({whiteboard, keywords, type, hasPR, flags}) {
+function renderWhiteboard({ whiteboard, keywords, type, hasPR, flags }) {
   const regex = /\[(.+?)\]/g;
   let matches = [];
   let tags = [];
@@ -99,7 +99,7 @@ export const columnTransforms = {
   },
   summary(value, bug, props) {
     const tags = !!props.tags && renderWhiteboard(bug);
-    const flags = renderWhiteboard({flags: bug.flags});
+    const flags = renderWhiteboard({ flags: bug.flags });
     return (
       <React.Fragment>
         <a target="_blank" rel="noopener noreferrer" href={OPEN_BUG_URL + bug.id}>

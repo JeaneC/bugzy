@@ -1,6 +1,6 @@
 import React from "react";
 import gStyles from "../../../styles/gStyles.scss";
-import {BUGZILLA_PRODUCT, FILE_NEW_BUGZILLA_COMPONENT} from "../../../../config/project_settings";
+import { BUGZILLA_PRODUCT, FILE_NEW_BUGZILLA_COMPONENT } from "../../../../config/project_settings";
 
 export const FileNewBugButton = props => {
   const url = `https://bugzilla.mozilla.org/enter_bug.cgi?${

@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./Exports.scss";
 import gStyles from "../../styles/gStyles.scss";
-import {BugList} from "../BugList/BugList";
-import {Loader} from "../Loader/Loader";
-import {DateTime} from "luxon";
+import { BugList } from "../BugList/BugList";
+import { Loader } from "../Loader/Loader";
+import { DateTime } from "luxon";
 
-import {runQuery} from "../../lib/utils";
-import {BUGZILLA_TRIAGE_COMPONENTS} from "../../../config/project_settings";
+import { runQuery } from "../../lib/utils";
+import { BUGZILLA_TRIAGE_COMPONENTS } from "../../../config/project_settings";
 
 const columns = ["id", "summary", "last_change_time", "priority"];
 
@@ -27,7 +27,7 @@ export class Exports extends React.PureComponent {
       order: "Resolution,cf_last_resolved DESC",
     };
 
-    const {bugs} = await runQuery(query);
+    const { bugs } = await runQuery(query);
     this.setState({
       loaded: true,
       bugs,

@@ -2,15 +2,15 @@
 
 module.exports = {
   defect: {
-    style: {color: "var(--red-50)", fontWeight: "bold"},
+    style: { color: "var(--red-50)", fontWeight: "bold" },
     label: "defect",
   },
   enhancement: {
-    style: {color: "var(--green-50)", fontWeight: "bold"},
+    style: { color: "var(--green-50)", fontWeight: "bold" },
     label: "enhancement",
   },
   needinfo: {
-    style: {color: "var(--gray-90)", fontWeight: "bold"},
+    style: { color: "var(--gray-90)", fontWeight: "bold" },
     label: "🤔 needinfo",
   },
   regression: {
@@ -51,7 +51,7 @@ module.exports = {
   },
   "strings landed": {
     label: "strings landed",
-    style: {color: "var(--teal-60)"},
+    style: { color: "var(--teal-60)" },
   },
   "strings m-c needed": {
     label: "strings m-c needed",

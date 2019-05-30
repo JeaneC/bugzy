@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 
 interface ReleaseDefinition {
   startVersion: number;
@@ -41,8 +41,14 @@ const REFERENCE_RELEASES: ReleaseDefinition[] = [
 ];
 
 export interface IterationLookup {
-  byDate: {[date: string]: string};
-  byVersionString: {[versionString: string]: {startDate: string; endDate: string; weeks: number}};
+  byDate: { [date: string]: string };
+  byVersionString: {
+    [versionString: string]: {
+      startDate: string;
+      endDate: string;
+      weeks: number;
+    };
+  };
   orderedVersionStrings: string[];
 }
 
@@ -51,7 +57,11 @@ export function generateIterationDates(): IterationLookup {
   const LAST_ITERATION = REFERENCE_RELEASES[REFERENCE_RELEASES.length - 1];
   const END_VERSION = 80;
 
-  const result: IterationLookup = {byDate: {}, byVersionString: {}, orderedVersionStrings: []};
+  const result: IterationLookup = {
+    byDate: {},
+    byVersionString: {},
+    orderedVersionStrings: [],
+  };
   let currentReferenceIndex = 0;
   let currentDate = EPOC_DATE;
   let currentVersion = EPOC_ITERATION.startVersion;
@@ -71,12 +81,12 @@ export function generateIterationDates(): IterationLookup {
           result.byVersionString[versionString] = {
             startDate: currentDate.toISO(),
             weeks: weeksInIteration,
-            endDate: currentDate.plus({days: weeksInIteration * 7 - 1}).toISO(),
+            endDate: currentDate.plus({ days: weeksInIteration * 7 - 1 }).toISO(),
           };
           result.orderedVersionStrings.push(versionString);
         }
 
-        currentDate = currentDate.plus({weeks: 1});
+        currentDate = currentDate.plus({ weeks: 1 });
       }
       currentIteration += 1;
     }

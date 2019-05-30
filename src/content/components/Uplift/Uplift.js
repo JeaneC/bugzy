@@ -1,8 +1,8 @@
 import React from "react";
-import {BugList} from "../BugList/BugList";
-import {Container} from "../ui/Container/Container";
-import {runQuery} from "../../lib/utils";
-import {BUGZILLA_TRIAGE_COMPONENTS} from "../../../config/project_settings";
+import { BugList } from "../BugList/BugList";
+import { Container } from "../ui/Container/Container";
+import { runQuery } from "../../lib/utils";
+import { BUGZILLA_TRIAGE_COMPONENTS } from "../../../config/project_settings";
 
 const columns = ["id", "summary", "last_change_time", "priority"];
 const displayColumns = [...columns, "cf_status_nightly", "cf_status_beta"];
@@ -28,21 +28,21 @@ export class Uplift extends React.PureComponent {
         target_milestone: ["---", `firefox ${prevRelease + 1}`],
         order: "changeddate DESC",
         custom: {
-          "flagtypes.name": {substring: `approval-mozilla-beta${type}`},
+          "flagtypes.name": { substring: `approval-mozilla-beta${type}` },
         },
       };
     }
-    const {bugs: upliftRequested} = await runQuery(getFlagQuery("?"));
-    const {bugs: upliftDenied} = await runQuery(getFlagQuery("-"));
-    const {bugs: upliftComplete} = await runQuery(getFlagQuery("+"));
+    const { bugs: upliftRequested } = await runQuery(getFlagQuery("?"));
+    const { bugs: upliftDenied } = await runQuery(getFlagQuery("-"));
+    const { bugs: upliftComplete } = await runQuery(getFlagQuery("+"));
     const betakey = `cf_tracking_firefox${prevRelease}`;
-    const {bugs: tracking} = await runQuery({
+    const { bugs: tracking } = await runQuery({
       include_fields: columns.concat([trackingField, statusField, statusNightly]),
       component: BUGZILLA_TRIAGE_COMPONENTS,
       order: "changeddate DESC",
       custom: {
-        [betakey]: {anyexact: ["?", "+", "blocking"]},
-        "flagtypes.name": {notsubstring: `approval-mozilla-beta`},
+        [betakey]: { anyexact: ["?", "+", "blocking"] },
+        "flagtypes.name": { notsubstring: `approval-mozilla-beta` },
       },
     });
     this.setState({

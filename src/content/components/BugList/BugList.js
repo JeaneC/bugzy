@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./BugList.scss";
 import gStyles from "../../styles/gStyles.scss";
-import {definitions} from "../../../schema/query_options";
-import {columnTransforms} from "./columnTransforms";
-import {isBugResolvedOrMerged} from "../../lib/utils";
-import {FileNewBugButton} from "../ui/FileNewBugButton/FileNewBugButton";
+import { definitions } from "../../../schema/query_options";
+import { columnTransforms } from "./columnTransforms";
+import { isBugResolvedOrMerged } from "../../lib/utils";
+import { FileNewBugButton } from "../ui/FileNewBugButton/FileNewBugButton";
 
 function getDisplayName(id) {
   return definitions[id] ? definitions[id].displayName : id;
@@ -52,14 +52,14 @@ export class BugList extends React.PureComponent {
       this.filterResolved().forEach(bug => {
         selectedBugs[bug.id] = true;
       });
-      this.setState({selectedBugs});
+      this.setState({ selectedBugs });
       return;
     }
-    this.setState({selectedBugs: {}});
+    this.setState({ selectedBugs: {} });
   }
 
   onCheck(e) {
-    const {checked, value} = e.target;
+    const { checked, value } = e.target;
     this.setState(prevState => {
       const newState = Object.assign({}, prevState.selectedBugs);
       if (checked) {
@@ -67,12 +67,12 @@ export class BugList extends React.PureComponent {
       } else {
         delete newState[value];
       }
-      return {selectedBugs: newState};
+      return { selectedBugs: newState };
     });
   }
 
   onCheckShowResolved(e) {
-    this.setState({showResolved: e.target.checked});
+    this.setState({ showResolved: e.target.checked });
   }
 
   getBulkEditLink(bugs) {
@@ -109,7 +109,7 @@ export class BugList extends React.PureComponent {
   }
 
   filterResolved() {
-    const {bugs} = this.props;
+    const { bugs } = this.props;
     if (this.state.showResolved) {
       return bugs;
     }
@@ -156,7 +156,7 @@ export class BugList extends React.PureComponent {
   }
 
   renderTable() {
-    const {props} = this;
+    const { props } = this;
     const totalBugs = this.filterResolved();
     const selectedBugs = Object.keys(this.state.selectedBugs);
     return (
@@ -211,7 +211,7 @@ export class BugList extends React.PureComponent {
   }
 
   render() {
-    const {props} = this;
+    const { props } = this;
     return (
       <React.Fragment>
         {props.title ? <h3>{props.title}</h3> : null}

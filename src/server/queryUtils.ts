@@ -1,5 +1,5 @@
 import * as request from "request";
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 
 const BZ_BASE_URI = "https://bugzilla.mozilla.org/rest/bug";
 
@@ -75,7 +75,7 @@ function _addRuleSet(
 }
 
 export function addRuleSet(config: QueryConfig | Array<QueryConfig>) {
-  const result = {query_format: "advanced"};
+  const result = { query_format: "advanced" };
   _addRuleSet(config, result);
   return result;
 }
@@ -105,16 +105,16 @@ function _addCustom(key, value, fIndex) {
     qs[`v${i}`] = value;
     i++;
   }
-  return {result: qs, index: i - 1};
+  return { result: qs, index: i - 1 };
 }
 
 // Converts a configuration to a query string understood by Bugzilla
 export function configToQuery(config: QueryConfig) {
-  const qs: {include_fields?: any} = {};
+  const qs: { include_fields?: any } = {};
   let fIndex = 0;
 
   function addCustom(key, value) {
-    const {result, index} = _addCustom(key, value, fIndex);
+    const { result, index } = _addCustom(key, value, fIndex);
     fIndex = index;
     return result;
   }
@@ -158,14 +158,14 @@ export async function fetchBugsFromBugzilla(qs: Object): Promise<any> {
           uri: BZ_BASE_URI,
           method: "GET",
           qs,
-          qsStringifyOptions: {arrayFormat: "repeat"},
+          qsStringifyOptions: { arrayFormat: "repeat" },
         },
         (error, resp, body) => {
           if (error) {
             console.log(error);
             return reject(error);
           }
-          let parsed = {bugs: []};
+          let parsed = { bugs: [] };
           try {
             parsed = JSON.parse(body);
           } catch (e) {
@@ -173,7 +173,7 @@ export async function fetchBugsFromBugzilla(qs: Object): Promise<any> {
             console.error(e);
           }
           const uri = resp.request.uri.href;
-          resolve({uri, bugs: parsed.bugs});
+          resolve({ uri, bugs: parsed.bugs });
         }
       );
     } catch (e) {
@@ -184,7 +184,7 @@ export async function fetchBugsFromBugzilla(qs: Object): Promise<any> {
 
 export async function fetchQuery(query: QueryConfig) {
   const qs = configToQuery(query);
-  const {uri, bugs} = (await fetchBugsFromBugzilla(qs)) || [];
+  const { uri, bugs } = (await fetchBugsFromBugzilla(qs)) || [];
   return {
     uri,
     query,

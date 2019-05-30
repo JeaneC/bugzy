@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Tabs.scss";
-import {NavLink, Route, Switch} from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 
 export class Tabs extends React.PureComponent {
   constructor(props) {
     super(props);
     this.renderTabLink = this.renderTabLink.bind(this);
     this.renderTabRoute = this.renderTabRoute.bind(this);
-    this.state = {bugs: [], loaded: false};
+    this.state = { bugs: [], loaded: false };
   }
 
   renderTabLink(tabInfo, i) {
@@ -30,7 +30,7 @@ export class Tabs extends React.PureComponent {
   }
 
   render() {
-    const {config} = this.props;
+    const { config } = this.props;
     return (
       <div>
         <div className={styles.tabsContainer}>

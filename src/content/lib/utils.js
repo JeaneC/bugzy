@@ -1,5 +1,5 @@
-import {prefs} from "./prefs";
-import {postProcess} from "./postProcess";
+import { prefs } from "./prefs";
+import { postProcess } from "./postProcess";
 
 const FAKE_TIME = new Date().toISOString();
 const FAKE_BUGS = [

@@ -1,22 +1,22 @@
 import React from "react";
 import styles from "./Router.scss";
-import {BugListView} from "../BugListView/BugListView";
-import {BrowserRouter, NavLink, Redirect, Route, Switch, withRouter} from "react-router-dom";
-import {columnTransforms as cTrans} from "../BugList/columnTransforms";
-import {IterationView} from "../IterationView/IterationView";
-import {MyBugs} from "../MyBugs/MyBugs";
-import {Preferences} from "../Preferences/Preferences";
+import { BugListView } from "../BugListView/BugListView";
+import { BrowserRouter, NavLink, Redirect, Route, Switch, withRouter } from "react-router-dom";
+import { columnTransforms as cTrans } from "../BugList/columnTransforms";
+import { IterationView } from "../IterationView/IterationView";
+import { MyBugs } from "../MyBugs/MyBugs";
+import { Preferences } from "../Preferences/Preferences";
 // import {ReleaseReport} from "../ReleaseReport/ReleaseReport";
-import {FeatureView} from "../FeatureView/FeatureView";
-import {PocketNewtabView} from "../PocketNewtabView/PocketNewtabView";
-import {Triage} from "../Triage/Triage";
-import {Uplift} from "../Uplift/Uplift";
-import {Exports} from "../Exports/Exports";
-import {FeatureList} from "../FeatureList/FeatureList";
-import {PriorityGuide} from "../PriorityGuide/PriorityGuide";
-import {getAdjacentIteration, getIteration} from "../../../common/iterationUtils";
-import {BUGZILLA_TRIAGE_COMPONENTS} from "../../../config/project_settings";
-import {isBugResolved} from "../../lib/utils";
+import { FeatureView } from "../FeatureView/FeatureView";
+import { PocketNewtabView } from "../PocketNewtabView/PocketNewtabView";
+import { Triage } from "../Triage/Triage";
+import { Uplift } from "../Uplift/Uplift";
+import { Exports } from "../Exports/Exports";
+import { FeatureList } from "../FeatureList/FeatureList";
+import { PriorityGuide } from "../PriorityGuide/PriorityGuide";
+import { getAdjacentIteration, getIteration } from "../../../common/iterationUtils";
+import { BUGZILLA_TRIAGE_COMPONENTS } from "../../../config/project_settings";
+import { isBugResolved } from "../../lib/utils";
 
 const POCKET_META = 1512725;
 
@@ -64,7 +64,7 @@ const RouterNav = withRouter(
     }
 
     render() {
-      const {routes} = this.props;
+      const { routes } = this.props;
       return (
         <nav className={styles.aside}>
           <ul>
@@ -127,7 +127,7 @@ export class Router extends React.PureComponent {
         icon: "up-arrow",
         routeProps: {
           path: "/uplift",
-          render: () => <Uplift {...{release, prevRelease}} />,
+          render: () => <Uplift {...{ release, prevRelease }} />,
         },
       },
       {
@@ -148,7 +148,7 @@ export class Router extends React.PureComponent {
           render: props => <Triage metas={this.props.metas} />,
         },
       },
-      {spacer: true},
+      { spacer: true },
       {
         label: "My Bugs",
         icon: "user",
@@ -180,7 +180,7 @@ export class Router extends React.PureComponent {
         icon: "up-arrow-yellow",
         routeProps: {
           path: "/exports",
-          render: () => <Exports {...{release, prevRelease}} />,
+          render: () => <Exports {...{ release, prevRelease }} />,
         },
       },
       {
@@ -200,8 +200,8 @@ export class Router extends React.PureComponent {
         },
         hidden: true,
       },
-      {spacer: true},
-      {header: `Firefox ${release} release`},
+      { spacer: true },
+      { header: `Firefox ${release} release` },
       {
         label: "Pocket + New Tab",
         icon: "pocket",
@@ -239,9 +239,9 @@ export class Router extends React.PureComponent {
                 component: BUGZILLA_TRIAGE_COMPONENTS,
                 resolution: "---",
                 custom: {
-                  blocked: {nowordssubstr: this.props.metas.map(m => m.id)},
-                  cf_fx_iteration: {notequals: "---"},
-                  keywords: {nowordssubstr: "meta"},
+                  blocked: { nowordssubstr: this.props.metas.map(m => m.id) },
+                  cf_fx_iteration: { notequals: "---" },
+                  keywords: { nowordssubstr: "meta" },
                 },
               }}
               sort={noFeatureSort}
@@ -278,7 +278,7 @@ export class Router extends React.PureComponent {
                     operator: "nowordssubstr",
                     value: this.props.metas.filter(meta => meta.priority === "P1").map(m => m.id),
                   },
-                  {key: "keywords", operator: "nowordssubstr", value: "meta"},
+                  { key: "keywords", operator: "nowordssubstr", value: "meta" },
                   {
                     operator: "OR",
                     rules: [
@@ -287,7 +287,7 @@ export class Router extends React.PureComponent {
                         operator: "notequals",
                         value: "---",
                       },
-                      {key: "priority", operator: "equals", value: "P1"},
+                      { key: "priority", operator: "equals", value: "P1" },
                     ],
                   },
                 ],
@@ -298,7 +298,7 @@ export class Router extends React.PureComponent {
           ), // eslint-disable-line react/jsx-no-bind
         },
       },
-      {spacer: true},
+      { spacer: true },
       {
         label: "About Bugzy",
         icon: "info",

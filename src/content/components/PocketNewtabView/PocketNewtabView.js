@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./PocketNewtabView.scss";
 import gStyles from "../../styles/gStyles.scss";
-import {BugList} from "../BugList/BugList";
-import {Loader} from "../Loader/Loader";
-import {CopyButton} from "../CopyButton/CopyButton";
-import {isBugResolved, runQuery} from "../../lib/utils";
-import {getIteration} from "../../../common/iterationUtils";
-import {BUGZILLA_PRODUCT, FILE_NEW_BUGZILLA_COMPONENT} from "../../../config/project_settings";
+import { BugList } from "../BugList/BugList";
+import { Loader } from "../Loader/Loader";
+import { CopyButton } from "../CopyButton/CopyButton";
+import { isBugResolved, runQuery } from "../../lib/utils";
+import { getIteration } from "../../../common/iterationUtils";
+import { BUGZILLA_PRODUCT, FILE_NEW_BUGZILLA_COMPONENT } from "../../../config/project_settings";
 
 // Use 66.4 iteration date - Jan 25, 2019 to pick 66 release for Pocket New Tab view
 const pocketIteration = getIteration("2019-01-25");
@@ -136,7 +136,7 @@ const CompactBugList = props => (
 export class PocketNewtabView extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {bugs: [], loaded: false};
+    this.state = { bugs: [], loaded: false };
   }
 
   innerSort(a, b) {
@@ -273,13 +273,13 @@ export class PocketNewtabView extends React.PureComponent {
     if (!id) {
       return;
     }
-    this.setState({bugs: [], loaded: false});
+    this.setState({ bugs: [], loaded: false });
     const result = await runQuery({
       include_fields: allColumns,
       resolution: ["---", "FIXED"],
-      custom: {blocked: id},
+      custom: { blocked: id },
     });
-    this.setState({bugs: result.bugs, loaded: true});
+    this.setState({ bugs: result.bugs, loaded: true });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -353,7 +353,7 @@ export class PocketNewtabView extends React.PureComponent {
       metasById[item.id] = item;
     }
 
-    const {metaId} = this.props;
+    const { metaId } = this.props;
     return (
       <div className={styles.container}>
         <h1>

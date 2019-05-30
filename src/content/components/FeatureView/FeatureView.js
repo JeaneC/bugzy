@@ -1,12 +1,12 @@
 import React from "react";
-import {BugList} from "../BugList/BugList";
-import {CopyButton} from "../CopyButton/CopyButton";
-import {qa_emails, ui_emails} from "../../../config/people";
-import {isBugResolved, runQuery} from "../../lib/utils";
-import {getIteration} from "../../../common/iterationUtils";
-import {Container} from "../ui/Container/Container";
-import {Tabs} from "../ui/Tabs/Tabs";
-import {removeMeta} from "../../../common/removeMeta";
+import { BugList } from "../BugList/BugList";
+import { CopyButton } from "../CopyButton/CopyButton";
+import { qa_emails, ui_emails } from "../../../config/people";
+import { isBugResolved, runQuery } from "../../lib/utils";
+import { getIteration } from "../../../common/iterationUtils";
+import { Container } from "../ui/Container/Container";
+import { Tabs } from "../ui/Tabs/Tabs";
+import { removeMeta } from "../../../common/removeMeta";
 import gStyles from "../../styles/gStyles.scss";
 
 const currentIteration = getIteration().number;
@@ -62,7 +62,7 @@ function doesBugNeedUI(bug) {
   );
 }
 
-const FeatureBugList = ({hideIfEmpty, bugs, title, extraColumns = [], ...restProps}) => {
+const FeatureBugList = ({ hideIfEmpty, bugs, title, extraColumns = [], ...restProps }) => {
   if (hideIfEmpty && !bugs.length) {
     return null;
   }
@@ -83,7 +83,7 @@ const FeatureBugList = ({hideIfEmpty, bugs, title, extraColumns = [], ...restPro
 };
 
 const EngineeringView = props => {
-  const {bugs, subMetas, parentMeta} = props;
+  const { bugs, subMetas, parentMeta } = props;
   return (
     <React.Fragment>
       <FeatureBugList title="Untriaged bugs" hideIfEmpty={true} bugs={bugs.untriaged} />
@@ -124,7 +124,7 @@ const EngineeringView = props => {
 };
 
 const UIView = props => {
-  const {bugs} = props;
+  const { bugs } = props;
   return (
     <React.Fragment>
       <p>
@@ -136,7 +136,7 @@ const UIView = props => {
 };
 
 const ResolvedView = props => {
-  const {bugs} = props;
+  const { bugs } = props;
   return (
     <React.Fragment>
       <FeatureBugList
@@ -181,7 +181,7 @@ const ResolvedView = props => {
 export class FeatureView extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {bugs: [], subMetas: [], loaded: false};
+    this.state = { bugs: [], subMetas: [], loaded: false };
     this.bulkEditAll = this.bulkEditAll.bind(this);
   }
 
@@ -304,15 +304,15 @@ export class FeatureView extends React.PureComponent {
     if (!id) {
       return;
     }
-    this.setState({bugs: [], subMetas: [], loaded: false});
+    this.setState({ bugs: [], subMetas: [], loaded: false });
 
     // First, get all the open sub-meta bugs.
-    const {bugs: subMetas} = await runQuery({
+    const { bugs: subMetas } = await runQuery({
       include_fields: allColumns,
       resolution: "---",
       rules: [
-        {key: "blocked", operator: "equals", value: id},
-        {key: "keywords", operator: "anyexact", value: "meta"},
+        { key: "blocked", operator: "equals", value: id },
+        { key: "keywords", operator: "anyexact", value: "meta" },
         // Hack to omit per-release metas from the submeta list
         {
           key: "status_whiteboard",
@@ -323,7 +323,7 @@ export class FeatureView extends React.PureComponent {
     });
 
     // Now get all bugs matching either the feature meta or its submetas
-    const {bugs} = await runQuery({
+    const { bugs } = await runQuery({
       include_fields: allColumns,
       resolution: ["---", "FIXED"],
       rules: [
@@ -332,11 +332,11 @@ export class FeatureView extends React.PureComponent {
           operator: "anywordssubstr",
           value: [...subMetas.map(m => m.id), id].join(","),
         },
-        {key: "keywords", operator: "nowordssubstr", value: "meta"},
+        { key: "keywords", operator: "nowordssubstr", value: "meta" },
       ],
     });
 
-    this.setState({bugs, subMetas, loaded: true});
+    this.setState({ bugs, subMetas, loaded: true });
   }
 
   bulkEditAll(e) {

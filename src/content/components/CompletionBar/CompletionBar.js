@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./CompletionBar.scss";
-import {getWorkDays} from "../../../common/iterationUtils";
-import {isBugResolvedOrMerged} from "../../lib/utils";
+import { getWorkDays } from "../../../common/iterationUtils";
+import { isBugResolvedOrMerged } from "../../lib/utils";
 
 const Marker = props => (
   <div
     className={`${styles.marker} ${styles[props.position || "top"]}`}
-    style={{left: `${props.percentage}%`}}>
+    style={{ left: `${props.percentage}%` }}>
     {props.children}
   </div>
 );
@@ -31,11 +31,11 @@ export const CompletionBar = props => {
         <div className={styles.completionBar}>
           <div
             className={`${styles.dateBar} ${aheadOfSchedule ? styles.ahead : styles.behind}`}
-            style={{width: `${daysPercentage}%`}}
+            style={{ width: `${daysPercentage}%` }}
           />
-          <div className={styles.bugsBar} style={{width: `${bugsPercentage}%`}} />
+          <div className={styles.bugsBar} style={{ width: `${bugsPercentage}%` }} />
         </div>
-        <div className={styles.dateLine} style={{left: `${daysPercentage}%`}} />
+        <div className={styles.dateLine} style={{ left: `${daysPercentage}%` }} />
         <Marker position="bottom" percentage={daysPercentage}>
           Today
         </Marker>

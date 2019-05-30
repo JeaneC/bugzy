@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Container.scss";
 import gStyles from "../../../styles/gStyles.scss";
-import {Loader} from "../../Loader/Loader";
-import {FileNewBugButton} from "../FileNewBugButton/FileNewBugButton";
+import { Loader } from "../../Loader/Loader";
+import { FileNewBugButton } from "../FileNewBugButton/FileNewBugButton";
 
 export const Container = props => (
   <div className={styles.container}>

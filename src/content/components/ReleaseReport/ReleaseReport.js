@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./ReleaseReport.scss";
-import {Loader} from "../Loader/Loader";
-import {CompletionBar} from "../CompletionBar/CompletionBar";
-import {isBugResolved, runQuery} from "../../lib/utils";
-import {getIteration} from "../../../common/iterationUtils";
-import {PROJECT_NAME, RELEASE_DOC_LINK} from "../../../config/project_settings";
+import { Loader } from "../Loader/Loader";
+import { CompletionBar } from "../CompletionBar/CompletionBar";
+import { isBugResolved, runQuery } from "../../lib/utils";
+import { getIteration } from "../../../common/iterationUtils";
+import { PROJECT_NAME, RELEASE_DOC_LINK } from "../../../config/project_settings";
 
 const OPEN_BUG_URL = "https://bugzilla.mozilla.org/show_bug.cgi?id=";
 // const columns = ["id", "summary", "last_change_time", "cf_fx_iteration"];
@@ -14,19 +14,19 @@ const release = getIteration().number.split(".")[0];
 export class ReleaseReport extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {bugs: [], loaded: false};
+    this.state = { bugs: [], loaded: false };
   }
 
   async componentWillMount() {
-    this.setState({loaded: false});
+    this.setState({ loaded: false });
     const result = await runQuery({
       include_fields: ["id", "summary", "blocks", "status"],
       iteration: release,
       resolution: ["---", "FIXED"],
-      custom: {blocked: this.props.metas.map(m => m.id)},
+      custom: { blocked: this.props.metas.map(m => m.id) },
     });
     // const bugs = require("../../../sandbox_results/1520741071242_RESULTS.json").results;
-    this.setState({bugs: result.bugs, loaded: true});
+    this.setState({ bugs: result.bugs, loaded: true });
   }
 
   render() {

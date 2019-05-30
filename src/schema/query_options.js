@@ -33,7 +33,7 @@ const definitions = {
   type: {
     displayName: "Type",
     description: "Whether a bug is a task, enhancement or defect",
-    type: {oneOf: ["task", "enhancement", "defect"]},
+    type: { oneOf: ["task", "enhancement", "defect"] },
     example: ["defect"],
   },
   resolution: {
@@ -58,7 +58,7 @@ const definitions = {
   priority: {
     displayName: "Priority",
     description: "The priority of the bug",
-    type: {oneOf: ["", "P1", "P2", "P3", "P4", "P5"]},
+    type: { oneOf: ["", "P1", "P2", "P3", "P4", "P5"] },
     examples: ["", "P2"],
   },
   whiteboard: {
@@ -155,7 +155,7 @@ const definitions = {
   j_top: {
     displayName: "Custom search AND/OR",
     description: "How should custom searches be combined? Note: default is AND",
-    type: {oneOf: ["", "OR", "AND_G"]}, // Note: AND_G means match all of the following against the same field
+    type: { oneOf: ["", "OR", "AND_G"] }, // Note: AND_G means match all of the following against the same field
     examples: ["OR"],
     // NOTE: Additional blocks can be j2=OR, j3=OR
   },
@@ -222,18 +222,18 @@ const custom_filters = [
 ];
 
 const custom_comparitors = {
-  equals: {displayName: "is"},
-  notequals: {displayName: "is not"},
-  anyexact: {displayName: "is any of"},
-  anywordssubstr: {displayName: "contains any of"},
-  nowordssubstr: {displayName: "does not contain any of"},
-  substring: {displayName: "contains"},
-  notsubstring: {displayName: "does not contain"},
-  casesubstring: {displayName: "contains (matching case)"},
-  lessthan: {displayName: "is less than"},
-  lessthaneq: {displayName: "is less than or equal to"},
-  greaterthan: {displayName: "is greater than"},
-  greaterthaneq: {displayName: "is greater than or equal to"},
+  equals: { displayName: "is" },
+  notequals: { displayName: "is not" },
+  anyexact: { displayName: "is any of" },
+  anywordssubstr: { displayName: "contains any of" },
+  nowordssubstr: { displayName: "does not contain any of" },
+  substring: { displayName: "contains" },
+  notsubstring: { displayName: "does not contain" },
+  casesubstring: { displayName: "contains (matching case)" },
+  lessthan: { displayName: "is less than" },
+  lessthaneq: { displayName: "is less than or equal to" },
+  greaterthan: { displayName: "is greater than" },
+  greaterthaneq: { displayName: "is greater than or equal to" },
 };
 
 // Note: these values should be added under the key "order".

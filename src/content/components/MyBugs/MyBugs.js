@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./MyBugs.scss";
 import gStyles from "../../styles/gStyles.scss";
-import {BugList} from "../BugList/BugList";
-import {runQuery} from "../../lib/utils";
-import {prefs} from "../../lib/prefs";
-import {Loader} from "../Loader/Loader";
+import { BugList } from "../BugList/BugList";
+import { runQuery } from "../../lib/utils";
+import { prefs } from "../../lib/prefs";
+import { Loader } from "../Loader/Loader";
 
 const columns = ["id", "summary", "last_change_time", "cf_fx_iteration"];
 const include_fields = columns.concat(["whiteboard", "keywords", "type", "status", "flags"]);
@@ -27,26 +27,26 @@ export class MyBugs extends React.PureComponent {
   }
 
   async refresh() {
-    this.setState({loaded: false});
-    const newState = {emailWasChanged: false, loaded: true};
+    this.setState({ loaded: false });
+    const newState = { emailWasChanged: false, loaded: true };
     if (this.state.email) {
       newState.bugsAssigned = (await runQuery({
         include_fields,
         resolution: "---",
         order: "changeddate DESC",
-        custom: {assigned_to: {equals: this.state.email}},
+        custom: { assigned_to: { equals: this.state.email } },
       })).bugs;
       newState.bugsFlags = (await runQuery({
         include_fields,
         resolution: "---",
         order: "changeddate DESC",
-        custom: {"requestees.login_name": {equals: this.state.email}},
+        custom: { "requestees.login_name": { equals: this.state.email } },
       })).bugs;
       newState.bugsComments = (await runQuery({
         include_fields,
         order: "changeddate DESC",
         limit: 30,
-        custom: {commenter: {equals: this.state.email}},
+        custom: { commenter: { equals: this.state.email } },
       })).bugs;
     }
     this.setState(newState);
@@ -54,11 +54,11 @@ export class MyBugs extends React.PureComponent {
 
   componentWillMount() {
     const email = prefs.get("bugzilla_email");
-    this.setState({email, showSettings: !email}, this.refresh);
+    this.setState({ email, showSettings: !email }, this.refresh);
   }
 
   onEmailChange(e) {
-    this.setState({email: e.target.value, emailWasChanged: true});
+    this.setState({ email: e.target.value, emailWasChanged: true });
   }
 
   onEmailSubmit(e) {
@@ -67,7 +67,7 @@ export class MyBugs extends React.PureComponent {
   }
 
   toggleSettings() {
-    this.setState(state => ({showSettings: !state.showSettings}));
+    this.setState(state => ({ showSettings: !state.showSettings }));
   }
 
   render() {

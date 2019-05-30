@@ -1,9 +1,9 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./FeatureList.scss";
 import gStyles from "../../styles/gStyles.scss";
-import {getIteration} from "../../../common/iterationUtils";
-import {isBugResolved} from "../../lib/utils";
+import { getIteration } from "../../../common/iterationUtils";
+import { isBugResolved } from "../../lib/utils";
 import {
   BUGZILLA_PRODUCT,
   EPIC_BUG_NUMBER,
@@ -52,8 +52,8 @@ export class FeatureList extends React.PureComponent {
   renderTableBody(bugs) {
     return (
       <tbody>
-        {bugs.map(({id, displayName, status}) => (
-          <tr className={isBugResolved({status}) ? styles.resolved : ""} key={id}>
+        {bugs.map(({ id, displayName, status }) => (
+          <tr className={isBugResolved({ status }) ? styles.resolved : ""} key={id}>
             <td className={styles.idColumn}>
               <a target="_blank" href={OPEN_BUG_URL + id} rel="noopener noreferrer">
                 {id}

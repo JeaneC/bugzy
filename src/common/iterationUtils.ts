@@ -1,5 +1,5 @@
-import {DateTime} from "luxon";
-import {ITERATION_LOOKUP} from "./ITERATION_LOOKUP";
+import { DateTime } from "luxon";
+import { ITERATION_LOOKUP } from "./ITERATION_LOOKUP";
 
 /**
  * getWorkDays - returns number of work days (M-F) between two dates.
@@ -36,7 +36,7 @@ export function getWorkDays(startDate: Date | string, endDate: Date | string) {
 }
 
 function getMondayBefore(date: DateTime): DateTime {
-  return date.minus({days: date.weekday - 1});
+  return date.minus({ days: date.weekday - 1 });
 }
 
 interface LegacyIteration {

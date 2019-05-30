@@ -1,5 +1,5 @@
-const {configToQuery, addRuleSet} = require("./queryUtils");
-const {assert} = require("chai");
+const { configToQuery, addRuleSet } = require("./queryUtils");
+const { assert } = require("chai");
 
 describe("configToQuery", () => {
   it("should generate a good query", () => {
@@ -26,7 +26,7 @@ describe("configToQuery", () => {
       ],
       iteration: ["60.4"],
       custom: {
-        assigned_to: {exactly: ["foo", "bar"]},
+        assigned_to: { exactly: ["foo", "bar"] },
       },
     });
     assert.deepEqual(result, expected);
@@ -37,10 +37,10 @@ describe("_addRuleset", () => {
   it("should convert arrays", () => {
     const qs = {};
     const config = [
-      {key: "a", operator: "contains", value: 1},
-      {key: "b", value: 2},
-      [{key: "c", value: 3}],
-      {key: "d", value: 4},
+      { key: "a", operator: "contains", value: 1 },
+      { key: "b", value: 2 },
+      [{ key: "c", value: 3 }],
+      { key: "d", value: 4 },
     ];
     const result = addRuleSet(config);
     const expected = {
@@ -66,7 +66,7 @@ describe("_addRuleset", () => {
     const qs = {};
     const config = {
       operator: "OR",
-      rules: [{key: "a", operator: "contains", value: 1}, {key: "b", value: 2}],
+      rules: [{ key: "a", operator: "contains", value: 1 }, { key: "b", value: 2 }],
     };
     const result = addRuleSet(config);
     const expected = {
@@ -84,10 +84,10 @@ describe("_addRuleset", () => {
   it("should convert operators in sub-groups", () => {
     const qs = {};
     const config = [
-      {key: "a", operator: "contains", value: 1},
+      { key: "a", operator: "contains", value: 1 },
       {
         operator: "OR",
-        rules: [{key: "b", value: 2}, {key: "c", value: 3}],
+        rules: [{ key: "b", value: 2 }, { key: "c", value: 3 }],
       },
     ];
     const result = addRuleSet(config);

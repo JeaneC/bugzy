@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./IterationView.scss";
-import {BugList} from "../BugList/BugList";
-import {Loader} from "../Loader/Loader";
-import {getIteration} from "../../../common/iterationUtils";
-import {isBugResolvedOrMerged, runQuery} from "../../lib/utils";
+import { BugList } from "../BugList/BugList";
+import { Loader } from "../Loader/Loader";
+import { getIteration } from "../../../common/iterationUtils";
+import { isBugResolvedOrMerged, runQuery } from "../../lib/utils";
 // const OPEN_BUG_URL = "https://bugzilla.mozilla.org/show_bug.cgi?id=";
-import {CompletionBar} from "../CompletionBar/CompletionBar";
-import {prefs} from "../../lib/prefs";
-import {BUGZILLA_TRIAGE_COMPONENTS, PROJECT_NAME} from "../../../config/project_settings";
+import { CompletionBar } from "../CompletionBar/CompletionBar";
+import { prefs } from "../../lib/prefs";
+import { BUGZILLA_TRIAGE_COMPONENTS, PROJECT_NAME } from "../../../config/project_settings";
 
 const QUERY_EXPLAINTAION = `All bugs in this iteration that are (a) blocking an ${PROJECT_NAME} meta bug or (b) in an ${PROJECT_NAME} component`;
 const getQuery = props => ({
@@ -24,7 +24,7 @@ const getQuery = props => ({
     "blocks",
   ],
   rules: [
-    {key: "cf_fx_iteration", operator: "substring", value: props.iteration},
+    { key: "cf_fx_iteration", operator: "substring", value: props.iteration },
     {
       operator: "OR",
       rules: [
@@ -70,22 +70,22 @@ export class IterationView extends React.PureComponent {
   }
 
   async getBugs() {
-    const {props} = this;
+    const { props } = this;
     const newState = {
       bugzilla_email: prefs.get("bugzilla_email"),
       bugsByMeta: {},
     };
 
-    let {iteration} = props;
+    let { iteration } = props;
 
-    const {number, start, due} = getIteration();
+    const { number, start, due } = getIteration();
     if (number === iteration) {
       newState.start = start;
       newState.due = due;
     }
 
     const result = await runQuery(getQuery(props));
-    const {bugs} = result;
+    const { bugs } = result;
 
     // Check if the iteration has already changed
     if (props.iteration !== iteration) {
@@ -97,11 +97,11 @@ export class IterationView extends React.PureComponent {
         meta => meta.priority === "P1" && bug.blocks.includes(meta.id)
       );
       if (!metas.length) {
-        metas.push({id: "other", displayName: "Other"});
+        metas.push({ id: "other", displayName: "Other" });
       }
       metas.forEach(meta => {
         if (!newState.bugsByMeta[meta.id]) {
-          newState.bugsByMeta[meta.id] = {meta, bugs: []};
+          newState.bugsByMeta[meta.id] = { meta, bugs: [] };
         }
         newState.bugsByMeta[meta.id].bugs.push(bug);
       });
@@ -185,7 +185,7 @@ export class IterationView extends React.PureComponent {
   }
 
   renderContent() {
-    const {state} = this;
+    const { state } = this;
     const isCurrent = !!state.start;
     const title = `${isCurrent ? "Current " : ""}Iteration`;
 
@@ -208,7 +208,7 @@ export class IterationView extends React.PureComponent {
   }
 
   render() {
-    const {state} = this;
+    const { state } = this;
     return (
       <div className={styles.container}>{state.loaded ? this.renderContent() : <Loader />}</div>
     );

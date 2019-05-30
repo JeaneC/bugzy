@@ -21,4 +21,4 @@ const ui_emails = ["wkonu@getpocket.com", "abenson@mozilla.com"];
 
 const qa_emails = ["bnagabandi@getpocket.com"];
 
-module.exports = {emails, ui_emails, qa_emails};
+module.exports = { emails, ui_emails, qa_emails };

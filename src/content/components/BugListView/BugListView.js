@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./BugListView.scss";
 import gStyles from "../../styles/gStyles.scss";
-import {BugList} from "../BugList/BugList";
-import {Loader} from "../Loader/Loader";
-import {runQuery} from "../../lib/utils";
+import { BugList } from "../BugList/BugList";
+import { Loader } from "../Loader/Loader";
+import { runQuery } from "../../lib/utils";
 
 export class BugListView extends React.PureComponent {
   constructor(props) {
@@ -23,7 +23,7 @@ export class BugListView extends React.PureComponent {
       include_fields: this.props.columns.concat(["whiteboard", "keywords", "type"]),
       resolution: ["---", "FIXED"],
     };
-    const {bugs, query, uri} = await runQuery(Object.assign({}, BASE_QUERY, this.props.query));
+    const { bugs, query, uri } = await runQuery(Object.assign({}, BASE_QUERY, this.props.query));
     this.setState({
       loaded: true,
       bugs: this.props.sort ? bugs.sort(this.props.sort) : bugs,
@@ -33,7 +33,7 @@ export class BugListView extends React.PureComponent {
   }
 
   toggleDebug() {
-    this.setState(prevState => ({showDebug: !prevState.showDebug}));
+    this.setState(prevState => ({ showDebug: !prevState.showDebug }));
   }
 
   renderDebug() {
