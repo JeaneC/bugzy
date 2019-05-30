@@ -4,7 +4,7 @@
   "description": "A bugzilla client for Activity Stream",
   "main": "main.js",
   "scripts": {
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\" --ignore-path .gitignore",
     "prestart": "npm run prettier && npm run generatelookups && npm run tsc:prod",
     "start": "npm run tsc:prod && concurrently -k -p --raw \"npm run parcel:dev\" \"npm run tsc:dev\" \"npm run serve\"",
     "start_prod": "node dist/server.js",
@@ -18,7 +18,7 @@
     "bundle": "npm run parcel:prod",
     "deploy": "git checkout -B deploy && npm run bundle && git add -f dist",
     "test": "npm run generatelookups && npm run lint && npm run tsc:prod && mocha -r ts-node/register src/**/*.test.js",
-    "lint": "eslint --ext=.js,.jsx . && prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
+    "lint": "eslint --ext=.js,.jsx . && prettier --check \"src/**/*.{ts,tsx,js,jsx}\" --ignore-path .gitignore",
     "prepush": "npm run lint"
   },
   "author": "k88hudson@gmail.com",
